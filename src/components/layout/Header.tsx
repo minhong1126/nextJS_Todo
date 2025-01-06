@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import logoLarge from "../../public/image/logo-large.png";
-import logoSmall from "../../public/image/logo-small.png";
+import logoLarge from "../../../public/image/logo-large.png";
+import logoSmall from "../../../public/image/logo-small.png";
 import { useEffect, useState } from "react";
 
 const Header = () => {
