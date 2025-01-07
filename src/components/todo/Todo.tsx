@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 interface Todo {
   id: number;
   content: string;
@@ -5,7 +7,16 @@ interface Todo {
 }
 
 const Todo = (prop: Todo) => {
-  return <></>;
+  return (
+    <>
+      <div className={clsx("max-w-[588px] w-full")}>
+        <button></button>
+        <div>
+          <span> {prop.content} </span>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Todo;

@@ -14,6 +14,7 @@ export default {
         rose: "#f43f5e",
         lime: "#bef264",
 
+        gray: "#F9FAFB",
         black900: "#0f172a",
         black800: "#1e293b",
         black500: "#64748b",

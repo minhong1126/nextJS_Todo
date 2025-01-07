@@ -1,49 +1,21 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
+// import Image from "next/image";
 import Header from "@/components/layout/Header";
+import List from "@/components/todo/List";
 import TodoInput from "@/components/todo/TodoInput";
-import TodoLabel from "../../public/image/todo.png";
-import DoneLabel from "../../public/image/done.png";
-import TodoLarge from "../../public/image/todo-large.png";
-import DoneLarge from "../../public/image/done-lage.png";
+import { useState } from "react";
 
-export default function Home() {
-  const [todoList, setTodoList] = useState();
-  const [doneList, setDoneList] = useState();
-  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+export default function Page() {
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [list, setList] = useState([]);
+
   return (
     <>
-      <Header />
-      <TodoInput isEmpty={isEmpty} />
-      <div>
-        <div>
-          <Image src={TodoLabel} alt="Todo Label" />
-          {todoList == null ? (
-            <>
-              <Image src={TodoLarge} alt="no Todo" />
-              <div className="font-bold text-black400">
-                <p>할 일이 없어요. </p>
-                <p> TODO를 새롭게 추가해주세요!</p>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
-        <div>
-          <Image src={DoneLabel} alt="Done Label" />
-          {doneList == null ? (
-            <>
-              <Image src={DoneLarge} alt="no Done" />
-              <div className="font-bold text-black400">
-                <p>아직 다 한 일이 없어요.</p>
-                <p>해야 할 일을 체크해보세요! </p>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+      <div className="flex flex-col w-full items-center  bg-gray">
+        <div className="max-w-[1200px] max-h-[1020px] w-full flex flex-col items-center">
+          <Header />
+          <TodoInput isEmpty={isEmpty} />
+          <List prop={list} />
         </div>
       </div>
     </>
