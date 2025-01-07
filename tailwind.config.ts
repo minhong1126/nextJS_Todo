@@ -9,8 +9,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        mainPurple: "#7c3aed",
+        lightPurple: "#ede9fe",
+        rose: "#f43f5e",
+        lime: "#bef264",
+
+        gray: "#F9FAFB",
+        black900: "#0f172a",
+        black800: "#1e293b",
+        black500: "#64748b",
+        black400: "#94a3b8",
+        black300: "#cbd5e1",
+        black200: "#e2e8f0",
+        black100: "#f1f5f9",
       },
     },
   },
