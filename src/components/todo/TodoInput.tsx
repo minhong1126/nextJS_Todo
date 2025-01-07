@@ -3,12 +3,35 @@ import React, { useState } from "react";
 import clsx from "clsx";
 
 const TodoInput = ({ isEmpty }: { isEmpty: boolean }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
 
-  const createTodo = () => {
-    // 대충 post 이벤트 하기
-    setValue("");
-  };
+  async function createTodo(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    try {
+      const data = await fetch(
+        "https://assignment-todolist-api.vercel.app/api/min/items",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: value,
+          }),
+        }
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .catch((err) => {
+          console.error("fetch error", err);
+        });
+      console.error(data);
+      setValue("");
+    } catch (err) {
+      console.error("try error", err);
+    }
+  }
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValue(e.target.value);

@@ -3,11 +3,19 @@
 import Header from "@/components/layout/Header";
 import List from "@/components/todo/List";
 import TodoInput from "@/components/todo/TodoInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<[]>();
+
+  // useEffect(() => {
+  //   fetch("/api/min/items")
+  //     .then((res) => {
+  //       res.json();
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, []);
 
   return (
     <>
