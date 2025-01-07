@@ -30,7 +30,8 @@ const TodoInput = ({ isEmpty }: { isEmpty: boolean }) => {
           })}
           onClick={createTodo}
         >
-          + 추가하기
+          <span className="hidden sm:block"> + 추가하기</span>
+          <span className="block sm:hidden"> + </span>
         </button>
       </form>
     </div>
