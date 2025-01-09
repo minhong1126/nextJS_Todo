@@ -2,8 +2,12 @@
 import Image from "next/image";
 import logoLarge from "../../../public/image/logo-large.png";
 import logoSmall from "../../../public/image/logo-small.png";
+import { redirect } from "next/navigation";
 
 const Header = () => {
+  function gotoHome() {
+    redirect("/");
+  }
   return (
     <>
       <header className="w-full bg-white">
@@ -14,6 +18,7 @@ const Header = () => {
             width={151}
             height={40}
             className="hidden sm:block"
+            onClick={gotoHome}
           />
           <Image
             src={logoSmall}
@@ -21,6 +26,7 @@ const Header = () => {
             width={71}
             height={40}
             className="block sm:hidden"
+            onClick={gotoHome}
           />
         </div>
       </header>

@@ -1,18 +1,28 @@
 import clsx from "clsx";
+import { redirect } from "next/navigation";
 
-interface Todo {
+interface TodoItem {
   id: number;
-  content: string;
-  isDone: boolean;
+  name: string;
+  isCompleted: boolean;
 }
 
-const Todo = (prop: Todo) => {
+const Todo = ({ todo }: { todo: TodoItem }) => {
+  function gotoDetail() {
+    redirect(`items/${todo.id}`);
+  }
+
+  async function changeIsCompleted() {}
+
   return (
     <>
-      <div className={clsx("max-w-[588px] w-full")}>
-        <button></button>
-        <div>
-          <span> {prop.content} </span>
+      <div className={clsx("flex")}>
+        <button
+          className="h-[32px] w-[32px] border-2 bg-black"
+          onClick={changeIsCompleted}
+        />
+        <div onClick={gotoDetail}>
+          <span> {todo.name} </span>
         </div>
       </div>
     </>

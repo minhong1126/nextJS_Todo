@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
-interface TodoProp {
+interface TodoItem {
   todo: {
     id: number;
-    content: string;
-    isDone: boolean;
+    name: string;
+    isCompleted: boolean;
   };
 }
 
-const Todo = ({ todo }: TodoProp) => {
+const Todo = ({ todo }: TodoItem) => {
   return (
     <>
       <div
@@ -18,14 +18,18 @@ const Todo = ({ todo }: TodoProp) => {
         )}
       >
         <button className="w-[32px] h-[32px]">
-          {todo.isDone ? (
+          {todo.isCompleted ? (
             <>
               <IoIosCheckmarkCircle className="w-[32px] h-[32px]" />
             </>
-          ) : null}
+          ) : (
+            <>
+              <IoIosCheckmarkCircle className="w-[32px] h-[32px]" />
+            </>
+          )}
         </button>
         <span>
-          <h1> {todo.content}</h1>
+          <h1> {todo.name}</h1>
         </span>
       </div>
     </>
