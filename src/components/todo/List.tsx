@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import TodoLabel from "../../../public/image/todo.png";
@@ -8,8 +7,6 @@ import DoneLabel from "../../../public/image/done.png";
 import DoneLarge from "../../../public/image/done-large.png";
 import DoneSmall from "../../../public/image/done-small.png";
 import Todo from "./Todo";
-import { useRecoilState } from "recoil";
-import { TodoItemList, DoneItemList } from "../../util/state";
 
 interface TodoItem {
   id: number;
@@ -19,7 +16,6 @@ interface TodoItem {
 
 const List = ({ prop }: { prop: TodoItem[] }) => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
-  const setTodoList = useRecoilState(TodoItemList);
 
   useEffect(() => {
     setTodos(prop || []);
@@ -27,6 +23,14 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
 
   const todoList = todos.filter((todo) => !todo.isCompleted);
   const doneList = todos.filter((todo) => todo.isCompleted);
+
+  const handleToggleComplete = (id: number) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
 
   const TodoList = ({ list }: { list: TodoItem[] }) => {
     return (
@@ -52,7 +56,11 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
         ) : (
           <div className="">
             {list.map((todo) => (
-              <Todo key={todo.id} todo={todo} />
+              <Todo
+                key={todo.id}
+                todo={todo}
+                onToggleComplete={handleToggleComplete}
+              />
             ))}
           </div>
         )}
@@ -84,7 +92,11 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
         ) : (
           <div className="">
             {list.map((todo) => (
-              <Todo key={todo.id} todo={todo} />
+              <Todo
+                key={todo.id}
+                todo={todo}
+                onToggleComplete={handleToggleComplete}
+              />
             ))}
           </div>
         )}

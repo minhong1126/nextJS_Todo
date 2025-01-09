@@ -6,6 +6,8 @@ interface TodoItem {
     id: number;
     name: string;
     isCompleted: boolean;
+    memo: string | null;
+    imgUrl: string | null;
   };
 }
 

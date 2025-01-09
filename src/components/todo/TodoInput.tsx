@@ -2,10 +2,22 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 
-const TodoInput = ({ isEmpty }: { isEmpty: boolean }) => {
+const TodoInput = ({
+  isEmpty,
+  isListChanged,
+  setIsListChanged,
+}: {
+  isEmpty: boolean;
+  isListChanged: number;
+  setIsListChanged: (num: number) => void;
+}) => {
   const [value, setValue] = useState<string>("");
 
-  async function createTodo(e: React.MouseEvent<HTMLButtonElement>) {
+  async function createTodo(
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) {
     e.preventDefault();
     try {
       const data = await fetch(
@@ -20,14 +32,14 @@ const TodoInput = ({ isEmpty }: { isEmpty: boolean }) => {
           }),
         }
       )
-        .then((res) => {
-          return res.json();
-        })
+        .then((res) => res.json())
         .catch((err) => {
           console.error("fetch error", err);
         });
+
       console.error(data);
       setValue("");
+      setIsListChanged(isListChanged + 1);
     } catch (err) {
       console.error("try error", err);
     }
@@ -37,6 +49,12 @@ const TodoInput = ({ isEmpty }: { isEmpty: boolean }) => {
     setValue(e.target.value);
   }
 
+  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      createTodo(e);
+    }
+  }
+
   return (
     <div className="w-full">
       <form className="flex font-700 justify-between">
@@ -44,6 +62,7 @@ const TodoInput = ({ isEmpty }: { isEmpty: boolean }) => {
           type="text"
           value={value}
           onChange={onChange}
+          onKeyDown={onKeyDown}
           placeholder="할 일을 입력해주세요"
           className="bg-black100 h-[56px] flex-1 rounded-[24px] pl-[24px] mr-[8px] sm:mr-[16px]"
         />
