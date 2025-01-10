@@ -1,18 +1,20 @@
 "use client";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Todo from "@/components/detail/Todo";
 import MemoInput from "@/components/detail/MemoInput";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 interface TodoItem {
   id: number;
   name: string;
   isCompleted: boolean;
+  memo: string | null;
+  imgUrl: string | null;
 }
 
 export default function Page() {
-  const [todo, setTodo] = useState<TodoItem | []>([]);
+  const [todo, setTodo] = useState<TodoItem | null>(null);
   const path = usePathname();
 
   useEffect(() => {
@@ -30,8 +32,11 @@ export default function Page() {
         .catch((err) => console.error(err));
       setTodo(data);
     }
+
     getTodo();
   }, [path]);
+
+  if (!todo) return <div>Loading...</div>; // Loading 상태 추가
 
   return (
     <>
