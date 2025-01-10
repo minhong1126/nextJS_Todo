@@ -4,9 +4,11 @@
 
 ### 마감 날짜 이후로 수정해도 된다는 연락을 받기 전까지는 수정되지 않을 예정입니다.
 
-<br />
 
 ## Stack
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 ## 보완점
 
@@ -55,8 +57,7 @@
 
 (시도해보지 않았음)
 
-> git clone
-> root에서 npm run dev
+> git clone 후 root에서 npm run dev
 
 ## 디자인
 
