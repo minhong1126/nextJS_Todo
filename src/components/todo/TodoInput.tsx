@@ -64,7 +64,7 @@ const TodoInput = ({
           onChange={onChange}
           onKeyDown={onKeyDown}
           placeholder="할 일을 입력해주세요"
-          className="bg-black100 h-[56px] flex-1 rounded-[24px] pl-[24px] mr-[8px] sm:mr-[16px]"
+          className="bg-black100 h-[56px] flex-1 rounded-[24px] pl-[24px] mr-[8px] sm:mr-[16px] w-[1016px]"
         />
         <button
           className={clsx("h-[56px] sm:w-[158.48px] w-[54.78px]", {
