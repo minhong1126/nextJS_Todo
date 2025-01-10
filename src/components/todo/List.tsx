@@ -34,7 +34,7 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
 
   const TodoList = ({ list }: { list: TodoItem[] }) => {
     return (
-      <div>
+      <div className="w-[588px] mr-[24px]">
         <Image src={TodoLabel} alt="Todo Label" />
         {list.length === 0 ? (
           <>
@@ -70,7 +70,7 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
 
   const DoneList = ({ list }: { list: TodoItem[] }) => {
     return (
-      <div>
+      <div className="w-[588px]">
         <Image src={DoneLabel} alt="Done Label" />
         {list.length === 0 ? (
           <>
@@ -105,7 +105,7 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
   };
 
   return (
-    <div className="md:flex justify-between">
+    <div className="md:flex justify-between mt-[40px]">
       <TodoList list={todoList} />
       <DoneList list={doneList} />
     </div>

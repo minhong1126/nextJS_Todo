@@ -13,6 +13,7 @@ export default {
         lightPurple: "#ede9fe",
         rose: "#f43f5e",
         lime: "#bef264",
+        amber: "#92400E",
 
         gray: "#F9FAFB",
         black900: "#0f172a",

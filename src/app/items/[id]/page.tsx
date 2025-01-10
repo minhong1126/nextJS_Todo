@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Header from "@/components/layout/Header";
 import Todo from "@/components/detail/Todo";
 import MemoInput from "@/components/detail/MemoInput";
 import { usePathname } from "next/navigation";
@@ -31,21 +30,25 @@ export default function Page() {
         .then((res) => res.json())
         .catch((err) => console.error(err));
       setTodo(data);
+      console.error(data);
     }
 
     getTodo();
   }, [path]);
 
-  if (!todo) return <div>Loading...</div>; // Loading 상태 추가
-
   return (
     <>
-      <div className="flex flex-col w-full items-center">
-        <div className="max-w-[1200px] max-h-[1020px] w-full flex flex-col items-center">
-          <Header />
+      <div className="flex flex-col w-full items-center mt-[24px]">
+        <div className="w-full flex flex-col items-center">
           <div className="px-[102px]">
-            <Todo todo={todo} />
-            <MemoInput todo={todo} />
+            {!todo ? (
+              <div>Loading...</div>
+            ) : (
+              <>
+                <Todo todo={todo} />
+                <MemoInput todo={todo} />
+              </>
+            )}
           </div>
         </div>
       </div>
