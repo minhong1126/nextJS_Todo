@@ -3,46 +3,55 @@ import Memo from "../../../public/image/memo.png";
 import nullImg from "../../../public/image/img.png";
 import { IoIosClose, IoIosCheckmark, IoIosAdd } from "react-icons/io";
 import { redirect } from "next/navigation";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 interface TodoItem {
   todo: {
     id: number;
     name: string;
     isCompleted: boolean;
-    memo: string;
+    memo: string | null;
     imgUrl: string | null;
   };
 }
 
 const MemoInput = ({ todo }: TodoItem) => {
-  const [memo, setMemo] = useState<string>(todo.memo);
+  const [memo, setMemo] = useState<string | null>(todo.memo);
   const [img, setImg] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(todo.imgUrl);
-  const imgRef = useRef<HTMLInputElement>(null);
+  const [prevImg, setPrevImg] = useState<string | null>(todo.imgUrl);
+  const imgRef = useRef();
+
+  useEffect(() => {
+    if (todo.imgUrl) {
+      setPrevImg(todo.imgUrl);
+      setImageUrl(todo.imgUrl);
+    }
+  }, [todo.imgUrl]);
+
   async function addImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
       setImg(file);
 
+      const previewUrl = URL.createObjectURL(file);
+      setPrevImg(previewUrl);
+
       const formData = new FormData();
-      formData.append("file", file); // 파일을 FormData에 추가
+      formData.append("image", file);
 
       try {
-        const response = await fetch(
+        const data = await fetch(
           `https://assignment-todolist-api.vercel.app/api/min/images/upload`,
           {
             method: "POST",
-            body: formData, // FormData 객체를 본문에 전송
+            body: formData,
           }
-        );
+        )
+          .then((res) => res.json())
+          .catch((err) => console.error("이미지 post", err));
 
-        const data = await response.json();
-        if (data.imageUrl) {
-          setImageUrl(data.imageUrl); // 서버에서 반환된 imageUrl로 상태 업데이트
-        } else {
-          console.error("No imageUrl returned from server", data);
-        }
+        setImageUrl(data.url);
       } catch (err) {
         console.error("Image upload failed", err);
       }
@@ -66,11 +75,10 @@ const MemoInput = ({ todo }: TodoItem) => {
         }),
       }
     )
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .catch((err) => console.error(err));
     console.error(data);
+    redirect("/");
   }
 
   async function deleteTodo(e: React.MouseEvent<HTMLButtonElement>) {
@@ -84,9 +92,7 @@ const MemoInput = ({ todo }: TodoItem) => {
         },
       }
     )
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .catch((err) => console.error(err));
     redirect("/");
   }
@@ -102,10 +108,10 @@ const MemoInput = ({ todo }: TodoItem) => {
           <div className="relative">
             <label htmlFor="file-upload" className="cursor-pointer">
               <div className="bg-black300 rounded-[24px] border-2 border-dotted border-#F8FAFC p-2 flex justify-center items-center">
-                {imageUrl ? (
+                {prevImg ? (
                   <Image
-                    src={imageUrl}
-                    alt="Uploaded Image"
+                    src={prevImg}
+                    alt="Uploaded Image Preview"
                     width={64}
                     height={64}
                     className="object-cover"
