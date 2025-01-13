@@ -1,40 +1,54 @@
+"use client";
+import { useDetailStore } from "@/state/detailState";
 import clsx from "clsx";
+import { useRef, useState, useEffect } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
-interface TodoItem {
-  todo: {
-    id: number;
-    name: string;
-    isCompleted: boolean;
-    memo: string | null;
-    imgUrl: string | null;
-  };
-}
+const Todo = () => {
+  const { todo, setTodo, updateTodo } = useDetailStore();
+  const [text, setText] = useState(todo.name);
+  const divRef = useRef<HTMLDivElement | null>(null);
 
-const Todo = ({ todo }: TodoItem) => {
+  function changeComplete() {
+    const updatedTodo = { ...todo, isCompleted: !todo.isCompleted };
+    setTodo(updatedTodo);
+    updateTodo(updatedTodo);
+  }
+
+  useEffect(() => {
+    if (text !== todo.name) {
+      const updatedTodo = { ...todo, name: text };
+      setTodo(updatedTodo);
+      updateTodo(updatedTodo);
+    }
+  }, [text]);
+
+  const onChange = (e: React.FormEvent<HTMLDivElement>) => {
+    setText(e.currentTarget.innerText);
+  };
+
   return (
-    <>
-      <div
-        className={clsx(
-          "flex border-2 border-black900 rounded-[24px] h-[64px] justify-center items-center mb-[24px]"
+    <div
+      className={clsx(
+        "flex border-2 border-black900 rounded-[24px] h-[64px] justify-center items-center mb-[24px]"
+      )}
+    >
+      <button className="w-[32px] h-[32px] mr-[16px]" onClick={changeComplete}>
+        {todo.isCompleted ? (
+          <IoIosCheckmarkCircle className="w-[32px] h-[32px]" />
+        ) : (
+          <div className="w-[32px] h-[32px] bg-[#FEFCE8] border-2 rounded-full" />
         )}
+      </button>
+      <div
+        ref={divRef}
+        contentEditable
+        suppressContentEditableWarning={true}
+        onInput={onChange}
       >
-        <button className="w-[32px] h-[32px] mr-[16px]">
-          {todo.isCompleted ? (
-            <>
-              <IoIosCheckmarkCircle className="w-[32px] h-[32px]" />
-            </>
-          ) : (
-            <>
-              <div className="w-[32px] h-[32px] bg-[#FEFCE8] border-2 rounded-full" />
-            </>
-          )}
-        </button>
-        <span>
-          <h1 className="underline"> {todo.name}</h1>
-        </span>
+        {text}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -26,14 +26,16 @@ export const useListStore = create<ListState>((set) => ({
 
   getList: async () => {
     try {
-      const response = await fetch(url, {
+      const data = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-      });
-
-      const data = await response.json();
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .catch((err) => console.error(err));
 
       const todoItems = data.filter((item: TodoItem) => !item.isCompleted);
       const doneItems = data.filter((item: TodoItem) => item.isCompleted);

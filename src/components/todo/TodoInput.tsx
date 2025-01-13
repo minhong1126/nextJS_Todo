@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import clsx from "clsx";
+import { useListStore } from "@/state/listState";
 
 const TodoInput = ({}) => {
   const [value, setValue] = useState<string>("");
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const { getList } = useListStore();
 
   async function createTodo(
     e:
@@ -32,6 +34,7 @@ const TodoInput = ({}) => {
 
       console.error(data);
       setValue("");
+      getList();
     } catch (err) {
       console.error("try error", err);
     }

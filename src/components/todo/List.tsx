@@ -7,7 +7,7 @@ import DoneLabel from "../../../public/image/done.png";
 import DoneLarge from "../../../public/image/done-large.png";
 import DoneSmall from "../../../public/image/done-small.png";
 import Todo from "./Todo";
-import { useListStore } from "@/state/state";
+import { useListStore } from "@/state/listState";
 
 const List = () => {
   const { todoList, doneList, getList, toggleTodoDone } = useListStore();
