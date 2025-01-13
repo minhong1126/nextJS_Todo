@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TodoLabel from "../../../public/image/todo.png";
 import TodoLarge from "../../../public/image/todo-large.png";
 import TodoSmall from "../../../public/image/todo-small.png";
@@ -7,36 +7,24 @@ import DoneLabel from "../../../public/image/done.png";
 import DoneLarge from "../../../public/image/done-large.png";
 import DoneSmall from "../../../public/image/done-small.png";
 import Todo from "./Todo";
+import { useListStore } from "@/state/state";
 
-interface TodoItem {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-}
-
-const List = ({ prop }: { prop: TodoItem[] }) => {
-  const [todos, setTodos] = useState<TodoItem[]>([]);
+const List = () => {
+  const { todoList, doneList, getList, toggleTodoDone } = useListStore();
 
   useEffect(() => {
-    setTodos(prop || []);
-  }, [prop]);
-
-  const todoList = todos.filter((todo) => !todo.isCompleted);
-  const doneList = todos.filter((todo) => todo.isCompleted);
+    getList();
+  }, [getList]);
 
   const handleToggleComplete = (id: number) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
-    );
+    toggleTodoDone(id);
   };
 
-  const TodoList = ({ list }: { list: TodoItem[] }) => {
+  const TodoList = () => {
     return (
       <div className="w-[588px] mr-[24px]">
         <Image src={TodoLabel} alt="Todo Label" />
-        {list.length === 0 ? (
+        {todoList.length === 0 ? (
           <>
             <Image
               src={TodoLarge}
@@ -55,7 +43,7 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
           </>
         ) : (
           <div className="">
-            {list.map((todo) => (
+            {todoList.map((todo) => (
               <Todo
                 key={todo.id}
                 todo={todo}
@@ -68,11 +56,11 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
     );
   };
 
-  const DoneList = ({ list }: { list: TodoItem[] }) => {
+  const DoneList = () => {
     return (
       <div className="w-[588px]">
         <Image src={DoneLabel} alt="Done Label" />
-        {list.length === 0 ? (
+        {doneList.length === 0 ? (
           <>
             <Image
               src={DoneLarge}
@@ -91,7 +79,7 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
           </>
         ) : (
           <div className="">
-            {list.map((todo) => (
+            {doneList.map((todo) => (
               <Todo
                 key={todo.id}
                 todo={todo}
@@ -106,8 +94,8 @@ const List = ({ prop }: { prop: TodoItem[] }) => {
 
   return (
     <div className="md:flex justify-between mt-[40px]">
-      <TodoList list={todoList} />
-      <DoneList list={doneList} />
+      <TodoList />
+      <DoneList />
     </div>
   );
 };

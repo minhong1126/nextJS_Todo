@@ -30,7 +30,6 @@ export default function Page() {
         .then((res) => res.json())
         .catch((err) => console.error(err));
       setTodo(data);
-      console.error(data);
     }
 
     getTodo();

@@ -45,7 +45,7 @@ const Todo = ({
           <div className="bg-white h-[32px] w-[32px] rounded-full border-2 border-black" />
         )}
       </button>
-      <div onClick={gotoDetail} className="ml-[16px]">
+      <div onClick={gotoDetail} className="ml-[16px] cursor-pointer">
         <h3
           className={clsx("text-black800", {
             "line-through": todo.isCompleted,
