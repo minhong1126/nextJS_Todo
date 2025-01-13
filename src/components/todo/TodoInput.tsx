@@ -1,17 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import clsx from "clsx";
+import { useListStore } from "@/state/listState";
 
-const TodoInput = ({
-  isEmpty,
-  isListChanged,
-  setIsListChanged,
-}: {
-  isEmpty: boolean;
-  isListChanged: number;
-  setIsListChanged: (num: number) => void;
-}) => {
+const TodoInput = ({}) => {
   const [value, setValue] = useState<string>("");
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const { getList } = useListStore();
 
   async function createTodo(
     e:
@@ -39,7 +34,7 @@ const TodoInput = ({
 
       console.error(data);
       setValue("");
-      setIsListChanged(isListChanged + 1);
+      getList();
     } catch (err) {
       console.error("try error", err);
     }
@@ -47,6 +42,11 @@ const TodoInput = ({
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValue(e.target.value);
+    if (e.target.value.length == 0) {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+    }
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -68,8 +68,8 @@ const TodoInput = ({
         />
         <button
           className={clsx("h-[56px] sm:w-[158.48px] w-[54.78px]", {
-            "bg-mainPurple text-white": isEmpty,
-            "bg-black200 text-black": !isEmpty,
+            "bg-mainPurple text-white": !isEmpty,
+            "bg-black200 text-black": isEmpty,
           })}
           onClick={createTodo}
         >

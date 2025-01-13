@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Memo from "../../../public/image/memo.png";
 import nullImg from "../../../public/image/img.png";
@@ -5,102 +6,66 @@ import { IoIosClose, IoIosCheckmark, IoIosAdd } from "react-icons/io";
 import { redirect } from "next/navigation";
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { useDetailStore } from "@/state/detailState";
 
-interface TodoItem {
-  todo: {
-    id: number;
-    name: string;
-    isCompleted: boolean;
-    memo: string | null;
-    imgUrl: string | null;
-  };
-}
-
-const MemoInput = ({ todo }: TodoItem) => {
-  const [memo, setMemo] = useState<string | null>(todo.memo);
+const MemoInput = () => {
+  const { todo, setTodo, updateTodo, deleteTodo } = useDetailStore();
+  const [memo, setMemo] = useState(todo.memo || "");
   const [img, setImg] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(todo.imgUrl);
-  const [prevImg, setPrevImg] = useState<string | null>(todo.imgUrl);
-  const imgRef = useRef();
-
-  useEffect(() => {
-    if (todo.imgUrl) {
-      setPrevImg(todo.imgUrl);
-      setImageUrl(todo.imgUrl);
-    }
-  }, [todo.imgUrl]);
+  const [prevImg, setPrevImg] = useState<string | null>(todo.imgUrl || null);
+  const imgRef = useRef<HTMLInputElement | null>(null);
 
   async function addImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
-      setImg(file);
-
       const previewUrl = URL.createObjectURL(file);
       setPrevImg(previewUrl);
+      setImg(file);
+      console.log(img);
 
       const formData = new FormData();
       formData.append("image", file);
 
       try {
-        const data = await fetch(
+        const response = await fetch(
           `https://assignment-todolist-api.vercel.app/api/min/images/upload`,
           {
             method: "POST",
             body: formData,
           }
-        )
-          .then((res) => res.json())
-          .catch((err) => console.error("이미지 post", err));
-
-        setImageUrl(data.url);
+        );
+        const data = await response.json();
+        const updatedTodo = { ...todo, imgUrl: data.url };
+        setTodo(updatedTodo);
+        updateTodo(updatedTodo);
+        setPrevImg(todo.imgUrl);
+        console.error("설정 후", todo.imgUrl);
       } catch (err) {
         console.error("Image upload failed", err);
       }
     }
   }
 
-  async function updateTodo(e: React.MouseEvent<HTMLButtonElement>) {
+  async function onUpdate(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const data = await fetch(
-      `https://assignment-todolist-api.vercel.app/api/min/items/${todo.id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: todo.name,
-          memo: memo,
-          imageUrl: imageUrl,
-          isCompleted: todo.isCompleted,
-        }),
-      }
-    )
-      .then((res) => res.json())
-      .catch((err) => console.error(err));
-    console.error(data);
+
+    const updatedTodo = { ...todo, memo: memo };
+    setTodo(updatedTodo);
+    updateTodo(updatedTodo);
     redirect("/");
   }
 
-  async function deleteTodo(e: React.MouseEvent<HTMLButtonElement>) {
+  function onDelete(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    await fetch(
-      `https://assignment-todolist-api.vercel.app/api/min/items/${todo.id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .catch((err) => console.error(err));
-    redirect("/");
+    deleteTodo(todo.id);
   }
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setMemo(e.target.value);
-  }
+  useEffect(() => {
+    if (todo.imgUrl) {
+      setPrevImg(todo.imgUrl);
+      console.error(todo.imgUrl);
+    }
+  }, [todo.imgUrl]);
 
   return (
     <div>
@@ -152,7 +117,7 @@ const MemoInput = ({ todo }: TodoItem) => {
               </p>
               <div className="w-full h-full mt-2 px-4">
                 <textarea
-                  value={memo || ""}
+                  value={memo}
                   onChange={(e) => setMemo(e.target.value)}
                   className="w-full h-full rounded-[24px] bg-transparent resize-none overflow-y-auto p-[3px]"
                 />
@@ -164,17 +129,17 @@ const MemoInput = ({ todo }: TodoItem) => {
         <div className="flex justify-end mt-4">
           <button
             className={clsx("flex items-center mr-[16px]  px-4 py-2", {
-              "bg-gray300": memo?.length == 0,
-              "bg-lime text-white": memo?.length != 0,
+              "bg-gray300": todo.memo?.length == 0,
+              "bg-lime text-white": todo.memo?.length != 0,
             })}
-            onClick={updateTodo}
+            onClick={onUpdate}
           >
             <IoIosCheckmark className="mr-[4px]" />
             <p>수정 완료</p>
           </button>
           <button
             className="flex items-center bg-rose text-white "
-            onClick={deleteTodo}
+            onClick={onDelete}
           >
             <IoIosClose className="mr-[4px]" />
             <p>삭제하기</p>

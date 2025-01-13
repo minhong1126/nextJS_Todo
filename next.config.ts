@@ -1,18 +1,5 @@
-// next.config.js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "s3.ap-northeast-2.amazonaws.com",
-        pathname: "/**",
-      },
-    ],
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+    domains: ["sprint-fe-project.s3.ap-northeast-2.amazonaws.com"],
   },
 };
-
-module.exports = nextConfig;
