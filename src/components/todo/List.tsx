@@ -22,19 +22,19 @@ const List = () => {
 
   const TodoList = () => {
     return (
-      <div className="w-[588px] mr-[24px]">
+      <div className="lar:w-[588px] med:w-[696px] sml:w-[344px] mr-[24px]">
         <Image src={TodoLabel} alt="Todo Label" />
         {todoList.length === 0 ? (
           <>
             <Image
               src={TodoLarge}
               alt="no Todo"
-              className="hidden sm:block h-[240px] w-[240px]"
+              className="hidden sml:block h-[240px] w-[240px]"
             />
             <Image
               src={TodoSmall}
               alt="no Todo"
-              className="block sm:hidden h-[120px] w-[120px]"
+              className="block sml:hidden h-[120px] w-[120px]"
             />
             <div className="text-black400">
               <p>할 일이 없어요.</p>
@@ -58,19 +58,19 @@ const List = () => {
 
   const DoneList = () => {
     return (
-      <div className="w-[588px]">
+      <div className="lar:w-[588px] med:w-[696px] sml:w-[344px]">
         <Image src={DoneLabel} alt="Done Label" />
         {doneList.length === 0 ? (
           <>
             <Image
               src={DoneLarge}
               alt="no Done"
-              className="hidden sm:block h-[240px] w-[240px]"
+              className="hidden sml:block h-[240px] w-[240px]"
             />
             <Image
               src={DoneSmall}
               alt="no Done"
-              className="block sm:hidden h-[120px] w-[120px]"
+              className="block sml:hidden h-[120px] w-[120px]"
             />
             <div className="text-black400">
               <p>아직 다 한 일이 없어요.</p>
@@ -93,7 +93,7 @@ const List = () => {
   };
 
   return (
-    <div className="md:flex justify-between mt-[40px]">
+    <div className="lar:flex justify-between mt-[40px]">
       <TodoList />
       <DoneList />
     </div>
