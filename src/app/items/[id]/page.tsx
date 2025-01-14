@@ -14,8 +14,8 @@ export default function Page() {
   }, [path]);
 
   return (
-    <div className="flex flex-col w-full items-center mt-[24px]">
-      <div className="w-full flex flex-col items-center">
+    <div className="w-full items-center justify-center mt-[24px]">
+      <div className="w-full flex flex-col items-center justify-center">
         <div className="px-[102px]">
           {loading ? (
             <div>Loading...</div>

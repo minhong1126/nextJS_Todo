@@ -1,6 +1,5 @@
 "use client";
 import { useDetailStore } from "@/state/detailState";
-import clsx from "clsx";
 import { useRef, useState, useEffect } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
@@ -29,9 +28,9 @@ const Todo = () => {
 
   return (
     <div
-      className={clsx(
-        "flex border-2 border-black900 rounded-[24px] h-[64px] justify-center items-center mb-[24px]"
-      )}
+      className={
+        "flex border-2 border-black900 rounded-[24px] h-[64px] justify-center items-center mb-[24px] lar:w-[996px] med:w-[696px] sml:w-[343px]"
+      }
     >
       <button className="w-[32px] h-[32px] mr-[16px]" onClick={changeComplete}>
         {todo.isCompleted ? (
