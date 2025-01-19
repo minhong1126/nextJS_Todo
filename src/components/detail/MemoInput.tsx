@@ -71,12 +71,12 @@ const MemoInput = () => {
   }, [todo.imgUrl]);
 
   return (
-    <div>
-      <form>
-        <div className="flex lar:flex-row flex-col items-center justify-center">
-          <div className="relative lar:w-[588px] med:w-[696px] sml:w-[343px] h-[311px] flex-shrink-0 mr-[24px]">
+    <div className="flex justify-center items-center">
+      <form className="w-full max-w-[996px] flex flex-col items-center">
+        <div className="flex lar:flex-row flex-col items-center justify-center w-full">
+          <div className="relative lar:w-[384px] med:w-[696px] sml:w-[343px] h-[311px] flex-shrink-0 mr-[24px]">
             <label htmlFor="file-upload" className="cursor-pointer">
-              <div className="bg-[#F8FAFC] rounded-[24px] border-2 border-dotted border-[#CBD5E1] flex justify-center items-center h-full relative overflow-hidden">
+              <div className="bg-[#F8FAFC] rounded-[24px] border-2 border-dotted border-black300 flex justify-center items-center h-full relative overflow-hidden">
                 {prevImg ? (
                   <Image
                     src={prevImg}
@@ -84,6 +84,8 @@ const MemoInput = () => {
                     layout="fill"
                     objectFit="cover"
                     className="rounded-[24px]"
+                    fill
+                    priority
                   />
                 ) : (
                   <div className="w-[64px] h-[64px]">
@@ -129,10 +131,10 @@ const MemoInput = () => {
           </div>
         </div>
 
-        <div className="flex lar:justify-end justify-center mt-4">
+        <div className="flex justify-center lar:justify-end mt-4 w-full">
           <button
-            className={clsx("flex items-center mr-[16px]  px-4 py-2", {
-              "bg-gray300": todo.memo?.length == 0,
+            className={clsx("flex items-center mr-[16px] px-4 py-2", {
+              "bg-black200": todo.memo?.length == 0,
               "bg-lime text-white": todo.memo?.length != 0,
             })}
             onClick={onUpdate}
@@ -141,7 +143,7 @@ const MemoInput = () => {
             <p>수정 완료</p>
           </button>
           <button
-            className="flex items-center bg-rose text-white "
+            className="flex items-center bg-rose text-white"
             onClick={onDelete}
           >
             <IoIosClose className="mr-[4px]" />

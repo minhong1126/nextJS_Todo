@@ -26,8 +26,8 @@ export default {
       },
     },
     screens: {
-      sml: "375px",
-      med: "744px",
+      sml: "374px",
+      med: "743px",
       lar: "1200px",
       max: "1201px",
     },
