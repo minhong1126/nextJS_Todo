@@ -34,9 +34,7 @@ const Todo = ({
       )}
     >
       <button
-        className={
-          "flex items-center rounded-full border-2 border-black h-[32px] w-[32px]"
-        }
+        className={"btnBox flex items-center rounded-full h-[32px] w-[32px]"}
         onClick={changeIsCompleted}
       >
         {todo.isCompleted ? (

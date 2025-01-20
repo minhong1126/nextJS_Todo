@@ -22,7 +22,10 @@ const List = () => {
 
   const TodoList = () => {
     return (
-      <div className="lar:w-[588px] med:w-[696px] sml:w-[344px] mr-[24px]">
+      <div
+        className="lar:w-[588px] med:w-[696px] sml:w-[344px] 
+      lar:mr-[24px] lar:mb-0 sml:mb-[48px]"
+      >
         <Image src={TodoLabel} alt="Todo Label" />
         {todoList.length === 0 ? (
           <div

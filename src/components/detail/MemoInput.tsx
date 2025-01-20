@@ -3,6 +3,7 @@ import Image from "next/image";
 import Memo from "../../../public/image/memo.png";
 import nullImg from "../../../public/image/img.png";
 import { IoIosClose, IoIosCheckmark, IoIosAdd } from "react-icons/io";
+import { FaPen } from "react-icons/fa";
 import { redirect } from "next/navigation";
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
@@ -41,7 +42,6 @@ const MemoInput = () => {
         setTodo(updatedTodo);
         updateTodo(updatedTodo);
         setPrevImg(todo.imageUrl);
-        console.error("설정 후", todo.imageUrl);
       } catch (err) {
         console.error("Image upload failed", err);
       }
@@ -60,6 +60,7 @@ const MemoInput = () => {
   function onDelete(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     deleteTodo(todo.id);
+    redirect("/");
   }
 
   useEffect(() => {
@@ -71,45 +72,70 @@ const MemoInput = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <form className="w-full max-w-[996px] flex flex-col items-center">
+      <form className="w-full max-w-[996px] flex flex-col items-center justify-center">
         <div className="flex lar:flex-row flex-col items-center justify-center w-full">
-          <div className="relative lar:w-[384px] med:w-[696px] sml:w-[343px] h-[311px] flex-shrink-0 mr-[24px]">
-            <label htmlFor="file-upload" className="cursor-pointer">
-              <div className="bg-[#F8FAFC] rounded-[24px] border-2 border-dotted border-black300 flex justify-center items-center h-full relative overflow-hidden">
-                {prevImg ? (
+          <div className="relative lar:w-[384px] med:w-[696px] sml:w-[343px] h-[311px] flex-shrink-0 lar:mr-[24px]">
+            <div className="bg-[#F8FAFC] rounded-[24px] border-2 border-dotted border-black300 flex justify-center items-center h-full relative overflow-hidden">
+              {prevImg ? (
+                <Image
+                  src={prevImg}
+                  alt="미리보기 이미지"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-[24px]"
+                  fill
+                  priority
+                />
+              ) : (
+                <div className="w-[64px] h-[64px]">
                   <Image
-                    src={prevImg}
-                    alt="미리보기 이미지"
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-[24px]"
-                    fill
-                    priority
+                    src={nullImg}
+                    alt="이미지 없음"
+                    width={64}
+                    height={64}
+                    className="object-cover"
                   />
-                ) : (
-                  <div className="w-[64px] h-[64px]">
-                    <Image
-                      src={nullImg}
-                      alt="이미지 없음"
-                      width={64}
-                      height={64}
-                      className="object-cover"
-                    />
-                  </div>
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={() => imgRef.current?.click()}
+                className={clsx(
+                  "absolute bottom-[16px] right-[16px] w-[64px] h-[64px] rounded-full cursor-pointer",
+                  {
+                    "bg-black200 ": prevImg == null,
+                    "bg-black900 bg-opacity-50": prevImg != null,
+                  }
                 )}
-                <IoIosAdd className="absolute top-2 right-2 text-white text-2xl" />
-              </div>
-            </label>
+              >
+                {prevImg == null ? (
+                  <>
+                    <span className="flex items-center justify-center">
+                      <IoIosAdd className="text-black500 w-[24px] h-[24px] text-[3px]" />
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="flex items-center justify-center">
+                      <FaPen color="white" className="w-[24px] h-[24px]" />
+                    </span>
+                  </>
+                )}
+              </button>
+            </div>
             <input
               type="file"
-              id="file-upload"
               ref={imgRef}
               onChange={addImage}
               className="hidden"
             />
           </div>
 
-          <div className="flex flex-row items-center relative lar:w-[588px] med:w-[696px] sml:w-[343px] h-[311px] flex-shrink-0">
+          <div
+            className="flex flex-row items-center relative flex-shrink-0
+           lar:w-[588px] med:w-[696px] sml:w-[343px] h-[311px] lar:mt-0 med:mt-[24px] sml:mt-[15px]"
+          >
             <Image
               src={Memo}
               alt="Memo"
@@ -132,17 +158,20 @@ const MemoInput = () => {
 
         <div className="flex justify-center lar:justify-end mt-4 w-full">
           <button
-            className={clsx("flex items-center mr-[16px] px-4 py-2", {
-              "bg-black200": todo.memo?.length == 0,
-              "bg-lime text-white": todo.memo?.length != 0,
-            })}
+            className={clsx(
+              "flex items-center mr-[16px] px-4 py-2 border-2 border-black900",
+              {
+                "bg-black200": todo.memo?.length == 0,
+                "bg-lime": todo.memo?.length != 0,
+              }
+            )}
             onClick={onUpdate}
           >
             <IoIosCheckmark className="mr-[4px]" />
             <p>수정 완료</p>
           </button>
           <button
-            className="flex items-center bg-rose text-white"
+            className="flex items-center bg-rose text-white border-2 border-black900"
             onClick={onDelete}
           >
             <IoIosClose className="mr-[4px]" />

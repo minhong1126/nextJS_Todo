@@ -14,7 +14,7 @@ export default function Page() {
   }, [path]);
 
   return (
-    <div className="w-full items-center justify-center mt-[24px]">
+    <div className="w-full items-center justify-center pt-[24px] bg-gray">
       {loading ? (
         <div>Loading...</div>
       ) : (

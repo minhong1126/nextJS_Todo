@@ -1,5 +1,6 @@
 "use client";
 import { useDetailStore } from "@/state/detailState";
+import clsx from "clsx";
 import { useRef, useState, useEffect } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
@@ -29,16 +30,20 @@ const Todo = () => {
   return (
     <div className="flex justify-center items-center">
       <div
-        className={
-          "flex border-2 border-black900 rounded-[24px] h-[64px] w-full justify-center items-center mb-[24px] lar:w-[996px] med:w-[696px] sml:w-[343px]"
-        }
+        className={clsx(
+          "flex border-2 border-black900 rounded-[24px] h-[64px] w-full justify-center items-center mb-[24px] lar:w-[996px] med:w-[696px] sml:w-[343px]",
+          {
+            "bg-lightPurple": todo.isCompleted,
+            "bg-white": !todo.isCompleted,
+          }
+        )}
       >
         <button
           className="w-[32px] h-[32px] mr-[16px]"
           onClick={changeComplete}
         >
           {todo.isCompleted ? (
-            <IoIosCheckmarkCircle className="w-[32px] h-[32px]" />
+            <IoIosCheckmarkCircle className="w-[32px] h-[32px] text-mainPurple" />
           ) : (
             <div className="w-[32px] h-[32px] bg-[#FEFCE8] border-2 rounded-full" />
           )}
@@ -47,6 +52,7 @@ const Todo = () => {
           ref={divRef}
           contentEditable
           suppressContentEditableWarning={true}
+          className="underline text-[20px] font-bold"
           onInput={onChange}
         >
           {text}
