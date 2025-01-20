@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* global.css
+전체적인 css 파일.
+공통적인 버튼 속성과 글씨 크기 및 두께가 선언되어 있습니다. */
+
 h1 {
   font-size: 20px;
   font-weight: 700;
@@ -18,5 +22,6 @@ button {
   align-items: center;
   justify-content: center;
   border-radius: 24px;
+  border: 2px;
   font-weight: 700;
 }

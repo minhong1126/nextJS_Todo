@@ -20,6 +20,11 @@ interface ListState {
   toggleTodoDone: (id: number) => void;
 }
 
+// listState.tsx
+// "/" 페이지의 상태 관리.
+// 할 일 리스트, 완료 리스트 저장, 완료 상태 변경 등의 기능이 담겨있습니다.
+// todo 생성은 TodoInput.tsx 에 포함되어 있습니다.
+
 export const useListStore = create<ListState>((set) => ({
   todoList: [],
   doneList: [],

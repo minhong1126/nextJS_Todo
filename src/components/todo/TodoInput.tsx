@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { useListStore } from "@/state/listState";
 
+// TodoInput.tsx
+// todo의 내용을 입력해 새로 생성하는 컴포넌트.
+// + 및 추가하기 버튼을 클릭하거나 Enter을 누르면 todo가 만들어져 바로 표시됩니다.
+
 const TodoInput = ({}) => {
   const [value, setValue] = useState<string>("");
   const [isEmpty, setIsEmpty] = useState<boolean>(true);

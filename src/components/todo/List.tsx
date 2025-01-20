@@ -9,6 +9,10 @@ import DoneSmall from "../../../public/image/done-small.png";
 import Todo from "./Todo";
 import { useListStore } from "@/state/listState";
 
+// List.tsx
+// 할 일 리스트, 완료 리스트가 담긴 컴포넌트.
+// List 컴포넌트 내부에서 TodoList, DoneList가 선언되어 return 하는 방식입니다.
+
 const List = () => {
   const { todoList, doneList, getList, toggleTodoDone } = useListStore();
 

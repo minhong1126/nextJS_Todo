@@ -1,5 +1,9 @@
 import type { Config } from "tailwindcss";
 
+// tailwind.config.ts
+// tailwindCSS의 환경.
+// 색 변수, 반응형을 위한 breakpoint가 선언되어 있습니다.
+
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",

@@ -18,6 +18,11 @@ interface DetailItem {
   deleteTodo: (id: number) => void;
 }
 
+// detailState.tsx
+// 상세 페이지 todo의 상태관리.
+// todo의 내용, 불러오기, 수정, 삭제의 기능이 담겨있습니다.
+// 이미지 등록 기능은 MemoInput.tsx에 포함되어 있습니다.
+
 export const useDetailStore = create<DetailItem>((set) => ({
   todo: {
     id: 0,

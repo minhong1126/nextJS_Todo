@@ -4,6 +4,9 @@ import logoLarge from "../../../public/image/logo-large.png";
 import logoSmall from "../../../public/image/logo-small.png";
 import { redirect } from "next/navigation";
 
+// Header.tsx
+// 로고가 담긴 헤더.
+
 const Header = () => {
   function gotoHome() {
     redirect("/");

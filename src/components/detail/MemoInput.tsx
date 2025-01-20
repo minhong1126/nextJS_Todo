@@ -9,6 +9,10 @@ import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useDetailStore } from "@/state/detailState";
 
+// MemoInput.tsx
+// 사진 등록, 메모 입력, 수정하기 및 삭제하기 버튼이 선언되어 있습니다.
+// 사진은 올리자마자 바로 서버에 등록되는 방식입니다.
+
 const MemoInput = () => {
   const { todo, setTodo, updateTodo, deleteTodo } = useDetailStore();
   const [memo, setMemo] = useState(todo.memo || "");
