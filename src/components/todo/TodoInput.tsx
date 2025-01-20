@@ -57,24 +57,24 @@ const TodoInput = ({}) => {
 
   return (
     <div className="w-full">
-      <form className="flex font-700 justify-between">
+      <form className="flex items-center font-700 justify-between">
         <input
           type="text"
           value={value}
           onChange={onChange}
           onKeyDown={onKeyDown}
           placeholder="할 일을 입력해주세요"
-          className="bg-black100 h-[56px] flex-1 rounded-[24px] pl-[24px] mr-[8px] sm:mr-[16px] w-[1016px]"
+          className="bg-black100 h-[56px] rounded-[24px] pl-[24px] mr-[8px] sml:mr-[16px] sml:w-[280px] med:w-[518px] lar:w-[1016px]"
         />
         <button
-          className={clsx("h-[56px] sm:w-[158.48px] w-[54.78px]", {
+          className={clsx("h-[56px] sml:w-[168px] w-[56px]", {
             "bg-mainPurple text-white": !isEmpty,
             "bg-black200 text-black": isEmpty,
           })}
           onClick={createTodo}
         >
-          <span className="hidden sm:block"> + 추가하기</span>
-          <span className="block sm:hidden"> + </span>
+          <span className="hidden sml:block">+ 추가하기</span>
+          <span className="block sml:hidden"> + </span>
         </button>
       </form>
     </div>

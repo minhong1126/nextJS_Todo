@@ -25,6 +25,12 @@ export default {
         black100: "#f1f5f9",
       },
     },
+    screens: {
+      sml: "375px",
+      med: "744px",
+      lar: "1200px",
+      max: "1201px",
+    },
   },
   plugins: [],
 } satisfies Config;

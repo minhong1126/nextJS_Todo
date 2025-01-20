@@ -27,14 +27,16 @@ const MemoInput = () => {
       formData.append("image", file);
 
       try {
-        const response = await fetch(
+        const data = await fetch(
           `https://assignment-todolist-api.vercel.app/api/min/images/upload`,
           {
             method: "POST",
             body: formData,
           }
-        );
-        const data = await response.json();
+        ).then((res) => {
+          return res.json();
+        });
+
         const updatedTodo = { ...todo, imageUrl: data.url };
         setTodo(updatedTodo);
         updateTodo(updatedTodo);
@@ -70,8 +72,8 @@ const MemoInput = () => {
   return (
     <div>
       <form>
-        <div className="flex">
-          <div className="relative w-[384px] h-[311px] flex-shrink-0 mr-[24px]">
+        <div className="flex lar:flex-row flex-col items-center justify-center">
+          <div className="relative lar:w-[588px] med:w-[696px] sml:w-[343px] h-[311px] flex-shrink-0 mr-[24px]">
             <label htmlFor="file-upload" className="cursor-pointer">
               <div className="bg-[#F8FAFC] rounded-[24px] border-2 border-dotted border-[#CBD5E1] flex justify-center items-center h-full relative overflow-hidden">
                 {prevImg ? (
@@ -105,7 +107,7 @@ const MemoInput = () => {
             />
           </div>
 
-          <div className="flex flex-row items-center relative w-[588px] h-[311px] flex-shrink-0">
+          <div className="flex flex-row items-center relative lar:w-[588px] med:w-[696px] sml:w-[343px] h-[311px] flex-shrink-0">
             <Image
               src={Memo}
               alt="Memo"
@@ -126,7 +128,7 @@ const MemoInput = () => {
           </div>
         </div>
 
-        <div className="flex justify-end mt-4">
+        <div className="flex lar:justify-end justify-center mt-4">
           <button
             className={clsx("flex items-center mr-[16px]  px-4 py-2", {
               "bg-gray300": todo.memo?.length == 0,

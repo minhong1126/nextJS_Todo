@@ -2,10 +2,10 @@
 
 > 코드잇 프론트엔드 단기캠프 과제 제출용 Next.js Todo
 
-### 마감 날짜 이후로 수정해도 된다는 연락을 받기 전까지는 수정되지 않을 예정입니다.
-
+### 1.14. 에 마지막으로 수정되었습니다.
 
 ## Stack
+
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
@@ -14,15 +14,12 @@
 
 - layout
 
-  - 반응형은 헤더 제외 거의 넣지 못했습니다. 모든 레이아웃은 Large 기준입니다.
+  - 반응형은 거의 넣었으나 어색한 부분이 존재합니다.
   - 박스 그림자를 넣지 못했습니다.
   - 그 외의 세세한 부분들도 넣지 못했습니다.
 
 - function
-  - 메인화면(/)
-    - 전역을 사용하지 않아 / 화면에서 Todo 클릭 시 화면에서는 변경되는 것처럼 보이나 실상은 변경되지 않습니다.
   - 세부화면(/items/${id})
-    - 할 일의 이름, 상태 변경이 구현되지 않았습니다.
     - 이미지 첨부 및 전송은 가능하나 다시 들어왔을 때 뜨지 않습니다. 대신 미리보기로 등록한 당시에는 뜹니다.
 - deploy
   - 배포에 실패했습니다.
@@ -48,10 +45,14 @@
     - List: 완료된 일과 완료되지 않은 일을 통합한 컴포넌트입니다. 각자 그 안에서 Todo를 불러오는 방식입니다.
     - Todo: 개별의 Todo입니다. Todo의 내용만 표시됩니다. 내용 클릭 시 세부 내용으로 넘어가며, 앞의 동그라미 버튼 클릭 시 완료 상태가 변경됩니다.
     - TodoInput: 상단의 Todo 입력 및 생성 컴포넌트입니다. Enter을 누르거나 추가하기 / + 버튼 클릭 시 생성됩니다.
+- state
+  - detailState: 상세 페이지의 Todo 상태를 담았습니다. 외에도 이미지 Post를 제외한 API 함수들이 포함되어 있습니다.
+  - listState: 전체 Todo 리스트의 상태를 담았습니다. API 함수들도 포함되었습니다.
 
 ### tailwind.config.ts
 
 - 색 코드들이 선언되어 있습니다.
+- 반응형 웹을 위한 break point들이 선언되어 있습니다.
 
 ## 실행
 
