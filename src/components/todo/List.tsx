@@ -22,10 +22,16 @@ const List = () => {
 
   const TodoList = () => {
     return (
-      <div className="lar:w-[588px] med:w-[696px] sml:w-[344px] mr-[24px]">
+      <div
+        className="lar:w-[588px] med:w-[696px] sml:w-[344px] 
+      lar:mr-[24px] lar:mb-0 sml:mb-[48px]"
+      >
         <Image src={TodoLabel} alt="Todo Label" />
         {todoList.length === 0 ? (
-          <>
+          <div
+            className="flex flex-col justify-center items-center 
+          lar:mt-[64px] lar:ml-[77px]"
+          >
             <Image
               src={TodoLarge}
               alt="no Todo"
@@ -36,11 +42,11 @@ const List = () => {
               alt="no Todo"
               className="block sml:hidden h-[120px] w-[120px]"
             />
-            <div className="text-black400">
+            <div className="flex flex-col items-center text-black400 lar:mt-[24px]">
               <p>할 일이 없어요.</p>
               <p> TODO를 새롭게 추가해주세요!</p>
             </div>
-          </>
+          </div>
         ) : (
           <div className="">
             {todoList.map((todo) => (
@@ -61,7 +67,10 @@ const List = () => {
       <div className="lar:w-[588px] med:w-[696px] sml:w-[344px]">
         <Image src={DoneLabel} alt="Done Label" />
         {doneList.length === 0 ? (
-          <>
+          <div
+            className="flex flex-col justify-center items-center 
+          lar:mt-[64px] lar:ml-[77px]"
+          >
             <Image
               src={DoneLarge}
               alt="no Done"
@@ -72,11 +81,11 @@ const List = () => {
               alt="no Done"
               className="block sml:hidden h-[120px] w-[120px]"
             />
-            <div className="text-black400">
+            <div className="flex flex-col items-center text-black400 lar:mt-[24px]">
               <p>아직 다 한 일이 없어요.</p>
               <p>해야 할 일을 체크해보세요!</p>
             </div>
-          </>
+          </div>
         ) : (
           <div className="">
             {doneList.map((todo) => (

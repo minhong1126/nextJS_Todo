@@ -1,5 +1,6 @@
 "use client";
 import { useDetailStore } from "@/state/detailState";
+import clsx from "clsx";
 import { useRef, useState, useEffect } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
@@ -20,32 +21,42 @@ const Todo = () => {
       setTodo(updatedTodo);
       updateTodo(updatedTodo);
     }
-  }, [text]);
+  });
 
   const onChange = (e: React.FormEvent<HTMLDivElement>) => {
     setText(e.currentTarget.innerText);
   };
 
   return (
-    <div
-      className={
-        "flex border-2 border-black900 rounded-[24px] h-[64px] justify-center items-center mb-[24px] lar:w-[996px] med:w-[696px] sml:w-[343px]"
-      }
-    >
-      <button className="w-[32px] h-[32px] mr-[16px]" onClick={changeComplete}>
-        {todo.isCompleted ? (
-          <IoIosCheckmarkCircle className="w-[32px] h-[32px]" />
-        ) : (
-          <div className="w-[32px] h-[32px] bg-[#FEFCE8] border-2 rounded-full" />
-        )}
-      </button>
+    <div className="flex justify-center items-center">
       <div
-        ref={divRef}
-        contentEditable
-        suppressContentEditableWarning={true}
-        onInput={onChange}
+        className={clsx(
+          "flex border-2 border-black900 rounded-[24px] h-[64px] w-full justify-center items-center mb-[24px] lar:w-[996px] med:w-[696px] sml:w-[343px]",
+          {
+            "bg-lightPurple": todo.isCompleted,
+            "bg-white": !todo.isCompleted,
+          }
+        )}
       >
-        {text}
+        <button
+          className="w-[32px] h-[32px] mr-[16px]"
+          onClick={changeComplete}
+        >
+          {todo.isCompleted ? (
+            <IoIosCheckmarkCircle className="w-[32px] h-[32px] text-mainPurple" />
+          ) : (
+            <div className="w-[32px] h-[32px] bg-[#FEFCE8] border-2 rounded-full" />
+          )}
+        </button>
+        <div
+          ref={divRef}
+          contentEditable
+          suppressContentEditableWarning={true}
+          className="underline text-[20px] font-bold"
+          onInput={onChange}
+        >
+          {text}
+        </div>
       </div>
     </div>
   );

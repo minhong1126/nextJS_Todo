@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+const url = "https://assignment-todolist-api.vercel.app/api/min";
 interface TodoItem {
   id: number;
   name: string;
@@ -32,15 +33,12 @@ export const useDetailStore = create<DetailItem>((set) => ({
   getTodo: async (id: string) => {
     set({ loading: true });
     try {
-      const data = await fetch(
-        `https://assignment-todolist-api.vercel.app/api/min${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const data = await fetch(`${url}${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const todo = await data.json();
       set({ todo, loading: false });
       console.error(todo);
@@ -51,38 +49,35 @@ export const useDetailStore = create<DetailItem>((set) => ({
 
   updateTodo: async (todo: TodoItem) => {
     try {
-      const data = await fetch(
-        `https://assignment-todolist-api.vercel.app/api/min/items/${todo.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: todo.name,
-            memo: todo.memo,
-            imageUrl: todo.imageUrl,
-            isCompleted: todo.isCompleted,
-          }),
-        }
-      );
-      const updatedTodo = await data.json();
-      set({ todo: updatedTodo });
+      const data = await fetch(`${url}/items/${todo.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: todo.name,
+          memo: todo.memo,
+          imageUrl: todo.imageUrl,
+          isCompleted: todo.isCompleted,
+        }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .catch((err) => console.error(err));
+      console.error(data);
     } catch (err) {
-      console.error("Error updating todo:", err);
+      console.error(err);
     }
   },
 
   deleteTodo: async (id: number) => {
-    await fetch(
-      `https://assignment-todolist-api.vercel.app/api/min/items/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    await fetch(`${url}/items/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .catch((err) => console.error(err));
   },

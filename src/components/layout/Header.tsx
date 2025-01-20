@@ -10,14 +10,17 @@ const Header = () => {
   }
   return (
     <>
-      <header className="w-full max-w-[1200px] bg-white">
-        <div className="flex h-[60px] sml:w-[75px] med:w-[744px] lar:w-[1200px] items-center justify-start">
+      <header className="flex justify-center w-full bg-white">
+        <div
+          className="flex h-[60px] items-center justify-start
+         sml:w-[75px] med:w-[744px] lar:w-[1200px] "
+        >
           <Image
             src={logoLarge}
             alt="logo Large"
             width={151}
             height={40}
-            className="hidden sml:block"
+            className="hidden med:block"
             onClick={gotoHome}
           />
           <Image
@@ -25,7 +28,7 @@ const Header = () => {
             alt="logo Small"
             width={71}
             height={40}
-            className="block sml:hidden"
+            className="block med:hidden"
             onClick={gotoHome}
           />
         </div>

@@ -34,6 +34,7 @@ const TodoInput = ({}) => {
 
       console.error(data);
       setValue("");
+      setIsEmpty(true);
       getList();
     } catch (err) {
       console.error("try error", err);
@@ -56,25 +57,29 @@ const TodoInput = ({}) => {
   }
 
   return (
-    <div className="w-full">
-      <form className="flex items-center font-700 justify-between">
+    <div className="w-full mt-[24px]">
+      <form className="flex items-center font-700 justify-center">
         <input
           type="text"
           value={value}
           onChange={onChange}
           onKeyDown={onKeyDown}
           placeholder="할 일을 입력해주세요"
-          className="bg-black100 h-[56px] rounded-[24px] pl-[24px] mr-[8px] sml:mr-[16px] sml:w-[280px] med:w-[518px] lar:w-[1016px]"
+          className="bg-black100 h-[56px] rounded-[24px] pl-[24px] mr-[8px] border-2 border-black900 shadow-inner
+          sml:mr-[16px] sml:w-[280px] med:w-[518px] lar:w-[1016px]"
         />
         <button
-          className={clsx("h-[56px] sml:w-[168px] w-[56px]", {
-            "bg-mainPurple text-white": !isEmpty,
-            "bg-black200 text-black": isEmpty,
-          })}
+          className={clsx(
+            "h-[56px] med:w-[168px] w-[56px] border-2 border-black900",
+            {
+              "bg-mainPurple text-white": !isEmpty,
+              "bg-black200 text-black": isEmpty,
+            }
+          )}
           onClick={createTodo}
         >
-          <span className="hidden sml:block">+ 추가하기</span>
-          <span className="block sml:hidden"> + </span>
+          <span className="hidden med:block">+ 추가하기</span>
+          <span className="block med:hidden"> + </span>
         </button>
       </form>
     </div>

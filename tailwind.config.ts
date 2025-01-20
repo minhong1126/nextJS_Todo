@@ -29,7 +29,6 @@ export default {
       sml: "375px",
       med: "744px",
       lar: "1200px",
-      max: "1201px",
     },
   },
   plugins: [],
