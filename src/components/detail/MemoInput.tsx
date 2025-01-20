@@ -12,7 +12,7 @@ const MemoInput = () => {
   const { todo, setTodo, updateTodo, deleteTodo } = useDetailStore();
   const [memo, setMemo] = useState(todo.memo || "");
   const [img, setImg] = useState<File | null>(null);
-  const [prevImg, setPrevImg] = useState<string | null>(todo.imgUrl || null);
+  const [prevImg, setPrevImg] = useState<string | null>(todo.imageUrl || null);
   const imgRef = useRef<HTMLInputElement | null>(null);
 
   async function addImage(e: React.ChangeEvent<HTMLInputElement>) {
@@ -35,11 +35,11 @@ const MemoInput = () => {
           }
         );
         const data = await response.json();
-        const updatedTodo = { ...todo, imgUrl: data.url };
+        const updatedTodo = { ...todo, imageUrl: data.url };
         setTodo(updatedTodo);
         updateTodo(updatedTodo);
-        setPrevImg(todo.imgUrl);
-        console.error("설정 후", todo.imgUrl);
+        setPrevImg(todo.imageUrl);
+        console.error("설정 후", todo.imageUrl);
       } catch (err) {
         console.error("Image upload failed", err);
       }
@@ -61,11 +61,11 @@ const MemoInput = () => {
   }
 
   useEffect(() => {
-    if (todo.imgUrl) {
-      setPrevImg(todo.imgUrl);
-      console.error(todo.imgUrl);
+    if (todo.imageUrl) {
+      setPrevImg(todo.imageUrl);
+      console.error(todo.imageUrl);
     }
-  }, [todo.imgUrl]);
+  }, [todo.imageUrl]);
 
   return (
     <div>
