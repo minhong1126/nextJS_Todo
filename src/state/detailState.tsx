@@ -5,7 +5,7 @@ interface TodoItem {
   name: string;
   isCompleted: boolean;
   memo: string | null;
-  imgUrl: string | null;
+  imageUrl: string | null;
 }
 
 interface DetailItem {
@@ -23,7 +23,7 @@ export const useDetailStore = create<DetailItem>((set) => ({
     name: "",
     isCompleted: false,
     memo: null,
-    imgUrl: null,
+    imageUrl: null,
   },
   loading: true,
 
@@ -61,7 +61,7 @@ export const useDetailStore = create<DetailItem>((set) => ({
           body: JSON.stringify({
             name: todo.name,
             memo: todo.memo,
-            imageUrl: todo.imgUrl,
+            imageUrl: todo.imageUrl,
             isCompleted: todo.isCompleted,
           }),
         }
