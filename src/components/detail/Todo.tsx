@@ -4,6 +4,11 @@ import clsx from "clsx";
 import { useRef, useState, useEffect } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
+// detail/Todo.tsx
+// 상세 페이지의 Todo.
+// 완료, 미완료 상태 및 내용을 변경할 수 있습니다.
+// 내용을 지울 때 조금 불편한 감이 없지않아 있습니다. 한 단어 삭제 후 클릭을 반복해주시면 됩니다.
+
 const Todo = () => {
   const { todo, setTodo, updateTodo } = useDetailStore();
   const [text, setText] = useState(todo.name);

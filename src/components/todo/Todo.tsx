@@ -8,6 +8,11 @@ interface TodoItem {
   isCompleted: boolean;
 }
 
+// todo/Todo.tsx
+// '/' 페이지의 개별 todo.
+// 기본적으로 todo에 등록된 내용 및 완료 여부가 표시됩니다.
+// 동그란 버튼 클릭 시 완료 여부를 변경할 수 있습니다.
+
 const Todo = ({
   todo,
   onToggleComplete,

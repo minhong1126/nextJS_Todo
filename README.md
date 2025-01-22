@@ -1,8 +1,8 @@
 # NextJs Todo
 
 > 코드잇 프론트엔드 단기캠프 과제 제출용 Next.js Todo
-
-### 1.14. 에 마지막으로 수정되었습니다.
+<br/>
+배포 링크: https://nexttodo-b2e2.vercel.app/
 
 ## Stack
 
@@ -10,25 +10,12 @@
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-## 보완점
-
-- layout
-
-  - 반응형은 거의 넣었으나 어색한 부분이 존재합니다.
-  - 박스 그림자를 넣지 못했습니다.
-  - 그 외의 세세한 부분들도 넣지 못했습니다.
-
-- function
-  - 세부화면(/items/${id})
-    - 이미지 첨부 및 전송은 가능하나 다시 들어왔을 때 뜨지 않습니다. 대신 미리보기로 등록한 당시에는 뜹니다.
-- deploy
-  - 배포에 실패했습니다.
-
 ## 파일 구조
 
 ### public
 
-- image 폴더 속에 필요한 이미지 요소들이 있습니다.
+- image: 필요한 이미지 요소들이 있습니다.
+- fonts: 폰트 파일이 저장되어 있습니다.
 
 ### src
 
