@@ -20,3 +20,25 @@ button {
   border-radius: 24px;
   font-weight: 700;
 }
+
+@layer components {
+  .input-shadow-small {
+    @apply shadow-[1.22px_3.5px_0_0_#0f172a];
+  }
+  .input-shadow-medium {
+    @apply shadow-[2.07px_3.5px_0_0_#0f172a];
+  }
+  .input-shadow-large {
+    @apply shadow-[4.06px_3.5px_0_0_#0f172a];
+  }
+
+  .button-shadow-small {
+    @apply shadow-[1.22px_4px_0_0_#0f172a];
+  }
+  .button-shadow-medium {
+    @apply shadow-[3.52px_4px_0_0_#0f172a];
+  }
+  .button-shadow-large {
+    @apply shadow-[3.65px_4px_0_0_#0f172a];
+  }
+}

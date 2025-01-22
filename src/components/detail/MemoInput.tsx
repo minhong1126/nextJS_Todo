@@ -9,6 +9,10 @@ import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useDetailStore } from "@/state/detailState";
 
+// MemoInput.tsx
+// 사진 등록, 메모 입력, 수정하기 및 삭제하기 버튼이 선언되어 있습니다.
+// 사진은 올리자마자 바로 서버에 등록되는 방식입니다.
+
 const MemoInput = () => {
   const { todo, setTodo, updateTodo, deleteTodo } = useDetailStore();
   const [memo, setMemo] = useState(todo.memo || "");
@@ -159,7 +163,7 @@ const MemoInput = () => {
         <div className="flex justify-center lar:justify-end mt-4 w-full">
           <button
             className={clsx(
-              "flex items-center mr-[16px] px-4 py-2 border-2 border-black900",
+              "button-shadow-large flex items-center mr-[16px] px-4 py-2 border-2 border-black900",
               {
                 "bg-black200": todo.memo?.length == 0,
                 "bg-lime": todo.memo?.length != 0,
@@ -171,7 +175,7 @@ const MemoInput = () => {
             <p>수정 완료</p>
           </button>
           <button
-            className="flex items-center bg-rose text-white border-2 border-black900"
+            className="button-shadow-large flex items-center px-4 py-2 bg-rose text-white border-2 border-black900"
             onClick={onDelete}
           >
             <IoIosClose className="mr-[4px]" />
