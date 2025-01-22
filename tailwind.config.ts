@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 // tailwind.config.ts
 // tailwindCSS의 환경.
-// 색 변수, 반응형을 위한 breakpoint가 선언되어 있습니다.
+// 색 변수, 반응형을 위한 breakpoint, 박스 그림자가 선언되어 있습니다.
 
 export default {
   content: [
@@ -27,6 +27,14 @@ export default {
         black300: "#cbd5e1",
         black200: "#e2e8f0",
         black100: "#f1f5f9",
+      },
+      boxShadow: {
+        btnLar: "3.65px 4px 0 0 black900",
+        btnMed: "3.52px 4px 0 0 black900",
+        btnSml: "1.22px 4px 0 0 black900",
+        inputLar: "4.06px 3.5px 0 0 black900",
+        inputMed: "2.07px 3.5px 0 0 black900",
+        inputSml: "1.22px 3.5px 0 0 black900",
       },
     },
     screens: {

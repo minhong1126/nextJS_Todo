@@ -163,7 +163,7 @@ const MemoInput = () => {
         <div className="flex justify-center lar:justify-end mt-4 w-full">
           <button
             className={clsx(
-              "flex items-center mr-[16px] px-4 py-2 border-2 border-black900",
+              "button-shadow-large flex items-center mr-[16px] px-4 py-2 border-2 border-black900",
               {
                 "bg-black200": todo.memo?.length == 0,
                 "bg-lime": todo.memo?.length != 0,
@@ -175,7 +175,7 @@ const MemoInput = () => {
             <p>수정 완료</p>
           </button>
           <button
-            className="flex items-center bg-rose text-white border-2 border-black900"
+            className="button-shadow-large flex items-center px-4 py-2 bg-rose text-white border-2 border-black900"
             onClick={onDelete}
           >
             <IoIosClose className="mr-[4px]" />
