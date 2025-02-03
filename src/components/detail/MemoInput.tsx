@@ -42,7 +42,8 @@ const MemoInput = () => {
           return res.json();
         });
 
-        const updatedTodo = { ...todo, imageUrl: data.url };
+        const memo = todo.memo != null ? todo.memo : "";
+        const updatedTodo = { ...todo, imageUrl: data.url, memo: memo };
         setTodo(updatedTodo);
         updateTodo(updatedTodo);
         setPrevImg(todo.imageUrl);
